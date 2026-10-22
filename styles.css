@@ -1,0 +1,176 @@
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #1e1b18;
+      color: #e0d8c3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 15px;
+      user-select: none;
+    }
+
+    .container {
+      background: #2b2520;
+      border: 3px solid #4a3f35;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .panel-luz {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .luz-telegrafo {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: #3a1515;
+      border: 2px solid #5c2222;
+      box-shadow: inset 0 0 5px #000;
+      transition: background-color 0.05s, box-shadow 0.05s;
+    }
+
+    .luz-telegrafo.encendida {
+      background-color: #ff3333;
+      border-color: #ff9999;
+      box-shadow: 0 0 15px #ff3333, 0 0 30px #ff0000;
+    }
+
+    .luz-label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: #a89f91;
+    }
+
+    .display-morse {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 5px;
+      color: #ffb703;
+      background-color: #12100e;
+      border: 2px solid #3d332a;
+      padding: 10px;
+      border-radius: 8px;
+      min-height: 52px;
+      margin-bottom: 20px;
+      word-break: break-all;
+    }
+
+    .telegrafo-base {
+      position: relative;
+      background: #5c4033;
+      border: 4px solid #3b281f;
+      border-radius: 12px;
+      height: 220px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 20px;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.4);
+      overflow: hidden;
+    }
+
+    .telegrafo-base::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 70px;
+      height: 40px;
+      background: #8c7853;
+      border: 2px solid #5e5038;
+      border-radius: 4px;
+    }
+
+    .telegrafo-brazo {
+      position: absolute;
+      top: 30px;
+      width: 24px;
+      height: 120px;
+      background: linear-gradient(90deg, #a3926e, #d4c5a5, #a3926e);
+      border: 2px solid #4a3e28;
+      border-radius: 4px;
+      z-index: 1;
+    }
+
+    .btn-pomo {
+      position: relative;
+      z-index: 2;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #444, #111);
+      border: 4px solid #666;
+      box-shadow: 0 8px 10px rgba(0,0,0,0.6);
+      cursor: pointer;
+      touch-action: none;
+      transition: transform 0.05s, box-shadow 0.05s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #888;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+
+    .btn-pomo:active, .btn-pomo.pulsado {
+      transform: scale(0.94) translateY(4px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      border-color: #888;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn-secundario {
+      flex: 1;
+      padding: 12px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      font-family: inherit;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #fff;
+      touch-action: manipulation;
+    }
+
+    .btn-borrar-uno {
+      background-color: #d97706;
+    }
+    .btn-borrar-todo {
+      background-color: #dc2626;
+    }
+
+    .resultado {
+      font-size: 1rem;
+      color: #a89f91;
+    }
+
+    .letra {
+      font-weight: bold;
+      font-size: 2.8rem;
+      color: #ffb703;
+      display: block;
+      margin-top: 5px;
+      min-height: 50px;
+    }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Telégrafo Morse Móvil</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="panel-luz">
+      <div id="luzIndicador" class="luz-telegrafo"></div>
+      <span class="luz-label">TELEGRAFO</span>
+    </div>
+
+    <div id="pantallaMorse" class="display-morse"></div>
+
+    <div class="telegrafo-base">
+      <div class="telegrafo-brazo"></div>
+      <div id="pulsador" class="btn-pomo">PULSAR</div>
+    </div>
+
+    <div class="acciones">
+      <button class="btn-secundario btn-borrar-uno" onclick="borrarUltimo()">⌫ Borrar 1</button>
+      <button class="btn-secundario btn-borrar-todo" onclick="borrarTodo()">C Borrar Todo</button>
+    </div>
+
+    <!-- Traducción -->
+    <div class="resultado">
+      LETRA TRADUCIDA:
+      <span id="salidaTexto" class="letra">-</span>
+    </div>
+  </div>
+
+  <script>
+    const diccionarioMorse = {
+      ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E",
+      "..-.": "F", "--.": "G", "....": "H", "..": "I", ".---": "J",
+      "-.-": "K", ".-..": "L", "--": "M", "-.": "N", "---": "O",
+      ".--.": "P", "--.-": "Q", ".-.": "R", "...": "S", "-": "T",
+      "..-": "U", "...-": "V", ".--": "W", "-..-": "X", "-.--": "Y",
+      "--..": "Z",
+      "-----": "0", ".----": "1", "..---": "2", "...--": "3",
+      "....-": "4", ".....": "5", "-....": "6", "--...": "7",
+      "---..": "8", "----.": "9"
+    };
+
+    let codigoActual = "";
+    let tiempoPresionado = 0;
+
+    const pulsador = document.getElementById("pulsador");
+    const pantallaMorse = document.getElementById("pantallaMorse");
+    const salidaTexto = document.getElementById("salidaTexto");
+    const luzIndicador = document.getElementById("luzIndicador");
+
+    function presionar(e) {
+      if (e) e.preventDefault();
+      if (tiempoPresionado) return;
+
+      tiempoPresionado = Date.now();
+      pulsador.classList.add("pulsado");
+      luzIndicador.classList.add("encendida");
+    }
+
+    function soltar(e) {
+      if (e) e.preventDefault();
+      if (!tiempoPresionado) return;
+
+      const duracion = Date.now() - tiempoPresionado;
+      tiempoPresionado = 0;
+
+      pulsador.classList.remove("pulsado");
+      luzIndicador.classList.remove("encendida");
+
+      if (duracion < 220) {
+        codigoActual += ".";
+      } else {
+        codigoActual += "-";
+      }
+
+      actualizarInterfaz();
+    }
+
+    function borrarUltimo() {
+      if (codigoActual.length > 0) {
+        codigoActual = codigoActual.slice(0, -1);
+        actualizarInterfaz();
+      }
+    }
+
+    function borrarTodo() {
+      codigoActual = "";
+      actualizarInterfaz();
+    }
+
+    function actualizarInterfaz() {
+      pantallaMorse.textContent = codigoActual;
+
+      if (diccionarioMorse[codigoActual]) {
+        salidaTexto.textContent = diccionarioMorse[codigoActual];
+      } else if (codigoActual === "") {
+        salidaTexto.textContent = "-";
+      } else {
+        salidaTexto.textContent = "Codigo incorrecto";
+      }
+    }
+
+    pulsador.addEventListener("mousedown", presionar);
+    window.addEventListener("mouseup", soltar);
+
+    pulsador.addEventListener("touchstart", presionar);
+    pulsador.addEventListener("touchend", soltar);
+  </script>
+
+</body>
+</html>
