@@ -9,27 +9,65 @@
 <body>
 
   <div class="container">
-    <div class="panel-luz">
-      <div id="luzIndicador" class="luz-telegrafo"></div>
-      <span class="luz-label">TELEGRAFO</span>
+    <!-- Tornillos decorativos de las esquinas -->
+    <span class="tornillo tl"></span>
+    <span class="tornillo tr"></span>
+    <span class="tornillo bl"></span>
+    <span class="tornillo br"></span>
+
+    <!-- Placa superior y luz piloto de cristal -->
+    <div class="placa-superior">
+      <div class="panel-luz">
+        <div class="bisel-luz">
+          <div id="luzIndicador" class="luz-telegrafo"></div>
+        </div>
+        <span class="luz-label">SEÑAL DE LÍNEA</span>
+      </div>
+      <div class="placa-modelo">TELÉGRAFO MORSE • PAT. 1844</div>
     </div>
 
-    <div id="pantallaMorse" class="display-morse"></div>
+    <!-- Ranura de cinta de papel telegráfico -->
+    <div class="ranura-papel">
+      <div id="pantallaMorse" class="display-morse"></div>
+    </div>
 
+    <!-- Base de madera y mecanismo electromagnético -->
     <div class="telegrafo-base">
-      <div class="telegrafo-brazo"></div>
-      <div id="pulsador" class="btn-pomo">PULSAR</div>
+      <!-- Bobinas de cobre (electroimanes) -->
+      <div class="electroiman">
+        <div class="bobina"></div>
+        <div class="puente-laton"></div>
+        <div class="bobina"></div>
+      </div>
+
+      <!-- Punto de contacto y chispa -->
+      <div class="yunque-contacto">
+        <span class="chispa"></span>
+      </div>
+
+      <!-- Brazo articulado de latón -->
+      <div class="telegrafo-brazo">
+        <span class="eje-pivote"></span>
+      </div>
+
+      <!-- Faldón de latón + Pomo de baquelita -->
+      <div class="soporte-pomo">
+        <div id="pulsador" class="btn-pomo">PULSAR</div>
+      </div>
     </div>
 
+    <!-- Interruptores mecánicos -->
     <div class="acciones">
-      <button class="btn-secundario btn-borrar-uno" onclick="borrarUltimo()">⌫ Borrar 1</button>
-      <button class="btn-secundario btn-borrar-todo" onclick="borrarTodo()">C Borrar Todo</button>
+      <button class="btn-secundario btn-borrar-uno" onclick="borrarUltimo()">⌫ BORRAR 1</button>
+      <button class="btn-secundario btn-borrar-todo" onclick="borrarTodo()">✕ LIMPIAR</button>
     </div>
 
-    <!-- Traducción -->
+    <!-- Visor de cristal para traducción -->
     <div class="resultado">
-      LETRA TRADUCIDA:
-      <span id="salidaTexto" class="letra">-</span>
+      <span class="resultado-titulo">CARÁCTER DECODIFICADO</span>
+      <div class="visor-cristal">
+        <span id="salidaTexto" class="letra">-</span>
+      </div>
     </div>
   </div>
 

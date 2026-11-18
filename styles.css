@@ -1,176 +1,401 @@
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-    body {
-      font-family: 'Courier New', Courier, monospace;
-      background-color: #1e1b18;
-      color: #e0d8c3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 15px;
-      user-select: none;
-    }
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background: radial-gradient(circle at center, #26211d 0%, #120f0d 100%);
+  color: #e8dcc4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 15px;
+  user-select: none;
+}
 
-    .container {
-      background: #2b2520;
-      border: 3px solid #4a3f35;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      max-width: 360px;
-      width: 100%;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    }
+/* Chasis principal de madera de caoba */
+.container {
+  position: relative;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.08) 0px,
+      rgba(0, 0, 0, 0.08) 2px,
+      transparent 2px,
+      transparent 8px
+    ),
+    linear-gradient(145deg, #4b2a18 0%, #2f180c 55%, #1f0f07 100%);
+  border: 4px solid #6b4c2a;
+  outline: 2px solid #140a05;
+  border-radius: 14px;
+  padding: 22px 20px;
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.85),
+    inset 0 2px 4px rgba(255, 220, 170, 0.2),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.7);
+}
 
-    .panel-luz {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
+/* Tornillos de latón ranurados */
+.tornillo {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f3d98b, #9c742c 70%, #4d3711 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+.tornillo::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 2px;
+  width: 8px;
+  height: 1.5px;
+  background: #3d2b0d;
+  transform: rotate(-35deg);
+}
+.tornillo.tl { top: 9px; left: 9px; }
+.tornillo.tr { top: 9px; right: 9px; }
+.tornillo.bl { bottom: 9px; left: 9px; }
+.tornillo.br { bottom: 9px; right: 9px; }
 
-    .luz-telegrafo {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background-color: #3a1515;
-      border: 2px solid #5c2222;
-      box-shadow: inset 0 0 5px #000;
-      transition: background-color 0.05s, box-shadow 0.05s;
-    }
+/* Placa identificativa superior */
+.placa-superior {
+  background: linear-gradient(180deg, #241e18 0%, #17130f 100%);
+  border: 2px solid #8c6b32;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.5);
+}
 
-    .luz-telegrafo.encendida {
-      background-color: #ff3333;
-      border-color: #ff9999;
-      box-shadow: 0 0 15px #ff3333, 0 0 30px #ff0000;
-    }
+.panel-luz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
 
-    .luz-label {
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      color: #a89f91;
-    }
+.bisel-luz {
+  padding: 3px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #d4af37, #6e5219);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
 
-    .display-morse {
-      font-size: 2rem;
-      font-weight: bold;
-      letter-spacing: 5px;
-      color: #ffb703;
-      background-color: #12100e;
-      border: 2px solid #3d332a;
-      padding: 10px;
-      border-radius: 8px;
-      min-height: 52px;
-      margin-bottom: 20px;
-      word-break: break-all;
-    }
+.luz-telegrafo {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #6e2222, #2b0909 80%);
+  border: 1px solid #4a1212;
+  box-shadow: inset 0 0 4px #000;
+  transition: all 0.05s ease;
+}
 
-    .telegrafo-base {
-      position: relative;
-      background: #5c4033;
-      border: 4px solid #3b281f;
-      border-radius: 12px;
-      height: 220px;
-      margin: 0 auto 20px auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 20px;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.4);
-      overflow: hidden;
-    }
+.luz-telegrafo.encendida {
+  background: radial-gradient(circle at 35% 35%, #ffcccc, #ff2a2a 55%, #b30000 100%);
+  border-color: #ffaaaa;
+  box-shadow:
+    0 0 12px #ff3333,
+    0 0 28px #ff1a1a,
+    inset 0 0 4px #fff;
+}
 
-    .telegrafo-base::before {
-      content: '';
-      position: absolute;
-      top: 20px;
-      width: 70px;
-      height: 40px;
-      background: #8c7853;
-      border: 2px solid #5e5038;
-      border-radius: 4px;
-    }
+.luz-label {
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #d4b886;
+  text-shadow: 0 1px 2px #000;
+}
 
-    .telegrafo-brazo {
-      position: absolute;
-      top: 30px;
-      width: 24px;
-      height: 120px;
-      background: linear-gradient(90deg, #a3926e, #d4c5a5, #a3926e);
-      border: 2px solid #4a3e28;
-      border-radius: 4px;
-      z-index: 1;
-    }
+.placa-modelo {
+  font-size: 0.62rem;
+  letter-spacing: 1.8px;
+  color: #8f7750;
+  border-top: 1px solid rgba(140, 107, 50, 0.3);
+  padding-top: 4px;
+}
 
-    .btn-pomo {
-      position: relative;
-      z-index: 2;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #444, #111);
-      border: 4px solid #666;
-      box-shadow: 0 8px 10px rgba(0,0,0,0.6);
-      cursor: pointer;
-      touch-action: none;
-      transition: transform 0.05s, box-shadow 0.05s;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #888;
-      font-size: 0.7rem;
-      font-weight: bold;
-    }
+/* Cinta de papel telegráfico */
+.ranura-papel {
+  background: #140f0b;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 2px solid #6b5028;
+  box-shadow: inset 0 4px 10px #000;
+  margin-bottom: 16px;
+}
 
-    .btn-pomo:active, .btn-pomo.pulsado {
-      transform: scale(0.94) translateY(4px);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.8);
-      border-color: #888;
-    }
+.display-morse {
+  position: relative;
+  font-size: 1.85rem;
+  font-weight: bold;
+  letter-spacing: 6px;
+  color: #1f1913;
+  background:
+    radial-gradient(circle, #c4b59b 1.5px, transparent 2px) 0 4px / 14px 10px repeat-x,
+    radial-gradient(circle, #c4b59b 1.5px, transparent 2px) 0 calc(100% - 4px) / 14px 10px repeat-x,
+    linear-gradient(180deg, #e6dcc6 0%, #f5eedc 50%, #dfd3ba 100%);
+  border-left: 3px dashed #9e8d70;
+  border-right: 3px dashed #9e8d70;
+  padding: 12px 10px;
+  min-height: 58px;
+  word-break: break-all;
+  box-shadow: inset 0 0 8px rgba(82, 62, 32, 0.35);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
 
-    .acciones {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+/* Base metálica del manipulador telegráfico */
+.telegrafo-base {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 40%, #3d342c 0%, #1c1713 85%);
+  border: 3px solid #8a6933;
+  border-radius: 12px;
+  height: 245px;
+  margin: 0 auto 18px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 18px;
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.85),
+    0 6px 14px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
 
-    .btn-secundario {
-      flex: 1;
-      padding: 12px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      font-family: inherit;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      color: #fff;
-      touch-action: manipulation;
-    }
+/* Conjunto de bobinas de cobre (electroimán) */
+.electroiman {
+  position: absolute;
+  top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
 
-    .btn-borrar-uno {
-      background-color: #d97706;
-    }
-    .btn-borrar-todo {
-      background-color: #dc2626;
-    }
+.bobina {
+  width: 34px;
+  height: 44px;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #7c3612 0px,
+      #d46e35 2px,
+      #f29b63 3px,
+      #63290b 5px
+    );
+  border-top: 4px solid #c9a24b;
+  border-bottom: 4px solid #8f6d27;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7), inset -4px 0 6px rgba(0, 0, 0, 0.4);
+}
 
-    .resultado {
-      font-size: 1rem;
-      color: #a89f91;
-    }
+.puente-laton {
+  width: 26px;
+  height: 14px;
+  background: linear-gradient(90deg, #8c6a2b, #ebd07a, #8c6a2b);
+  border: 1px solid #4f3a14;
+  border-radius: 2px;
+}
 
-    .letra {
-      font-weight: bold;
-      font-size: 2.8rem;
-      color: #ffb703;
-      display: block;
-      margin-top: 5px;
-      min-height: 50px;
-    }
+/* Contacto eléctrico / Yunque */
+.yunque-contacto {
+  position: absolute;
+  top: 66px;
+  width: 36px;
+  height: 16px;
+  background: linear-gradient(180deg, #d4af37, #6e5219);
+  border-radius: 4px;
+  border: 1px solid #3b2a0b;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chispa {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(circle, #ffffff 10%, #ffd166 50%, transparent 75%);
+  transition: opacity 0.04s;
+}
+
+/* Brazo principal de latón */
+.telegrafo-brazo {
+  position: absolute;
+  top: 52px;
+  width: 26px;
+  height: 115px;
+  background: linear-gradient(90deg, #7a5c24 0%, #e6c66e 35%, #fff0b3 50%, #b88c35 75%, #5e4417 100%);
+  border: 1.5px solid #3d2b0c;
+  border-radius: 5px;
+  z-index: 2;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.7);
+  transition: transform 0.05s ease;
+}
+
+.eje-pivote {
+  position: absolute;
+  top: 22px;
+  left: -8px;
+  width: 40px;
+  height: 8px;
+  background: linear-gradient(180deg, #e0c068, #70531c);
+  border-radius: 3px;
+  border: 1px solid #332308;
+}
+
+/* Faldón protector de latón bajo el pomo */
+.soporte-pomo {
+  position: relative;
+  z-index: 3;
+  width: 114px;
+  height: 114px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f5dc8c 0%, #b88c32 55%, #5c4213 100%);
+  border: 2px solid #3b290a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+    0 10px 16px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+/* Pomo de baquelita negra */
+.btn-pomo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #545454 0%, #222222 35%, #0a0a0a 85%, #000 100%);
+  border: 2px solid #3a3a3a;
+  box-shadow:
+    0 6px 10px rgba(0, 0, 0, 0.85),
+    inset 0 3px 6px rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  touch-action: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a3957e;
+  font-size: 0.68rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+/* Animación física al presionar el manipulador */
+.btn-pomo:active,
+.btn-pomo.pulsado {
+  transform: scale(0.95) translateY(3px);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15);
+  color: #f5d78c;
+}
+
+.telegrafo-base:has(#pulsador.pulsado) .soporte-pomo {
+  transform: translateY(3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+.telegrafo-base:has(#pulsador.pulsado) .telegrafo-brazo {
+  transform: translateY(4px) scaleY(0.97);
+}
+
+.telegrafo-base:has(#pulsador.pulsado) .chispa {
+  opacity: 1;
+  box-shadow: 0 0 14px #ffb703, 0 0 24px #fb8500;
+}
+
+/* Interruptores tipo máquina de escribir / latón */
+.acciones {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.btn-secundario {
+  flex: 1;
+  padding: 11px 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: inherit;
+  border-radius: 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+
+.btn-borrar-uno {
+  background: linear-gradient(180deg, #9c5a1a 0%, #63350b 100%);
+  border: 2px solid #c99742;
+  color: #ffebd2;
+  box-shadow: 0 4px 0 #361b04, 0 6px 10px rgba(0, 0, 0, 0.6);
+}
+
+.btn-borrar-todo {
+  background: linear-gradient(180deg, #8f241e 0%, #57110d 100%);
+  border: 2px solid #c99742;
+  color: #ffd6d4;
+  box-shadow: 0 4px 0 #2e0705, 0 6px 10px rgba(0, 0, 0, 0.6);
+}
+
+.btn-secundario:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #1f0d02, 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Visor final de decodificación */
+.resultado {
+  background: linear-gradient(180deg, #241b13 0%, #17110c 100%);
+  border: 2px solid #7d5e2b;
+  border-radius: 10px;
+  padding: 10px 12px 12px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.resultado-titulo {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: #b59b6d;
+  margin-bottom: 6px;
+}
+
+.visor-cristal {
+  background: radial-gradient(circle at center, #2b1d0e 0%, #120b05 100%);
+  border: 2px solid #59411b;
+  border-radius: 6px;
+  padding: 6px;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.95);
+}
+
+.letra {
+  font-weight: bold;
+  font-size: 2.1rem;
+  color: #ffbe3b;
+  text-shadow:
+    0 0 8px rgba(255, 170, 0, 0.75),
+    0 0 18px rgba(255, 120, 0, 0.45);
+  line-height: 1.15;
+}
