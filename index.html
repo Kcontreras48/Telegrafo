@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <div class="container" id="contenedorPrincipal">
+  <div class="container">
     <!-- Tornillos decorativos de las esquinas -->
     <span class="tornillo tl"></span>
     <span class="tornillo tr"></span>
@@ -73,15 +73,6 @@
     </div>
   </div>
 
-  <!-- MENSAJE DE EXPLOSIÓN SOBRE TODA LA PANTALLA (Oculto hasta que llegue a 00:00.000) -->
-  <div id="pantallaExplosion" class="overlay-explosion oculto">
-    <div class="cartel-explosion">
-      <div class="icono-bomba">💥</div>
-      <h1>LA BOMBA HA EXPLOTADO</h1>
-      <button class="btn-reiniciar" onclick="reiniciarSistema()">REINICIAR</button>
-    </div>
-  </div>
-
   <script>
     const diccionarioMorse = {
       ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E",
@@ -102,16 +93,12 @@
     const TIEMPO_TOTAL_MS = 3 * 60 * 1000;
     let cronometroIniciado = false;
     let tiempoFin = 0;
-    let animacionFrameId = null;
-    let exploto = false;
 
     const pulsador = document.getElementById("pulsador");
     const pantallaMorse = document.getElementById("pantallaMorse");
     const salidaTexto = document.getElementById("salidaTexto");
     const luzIndicador = document.getElementById("luzIndicador");
     const visorCronometro = document.getElementById("visorCronometro");
-    const pantallaExplosion = document.getElementById("pantallaExplosion");
-    const contenedorPrincipal = document.getElementById("contenedorPrincipal");
 
     function iniciarCronometro() {
       if (cronometroIniciado) return;
@@ -139,40 +126,16 @@
       }
 
       if (restante > 0) {
-        animacionFrameId = requestAnimationFrame(actualizarCronometro);
+        requestAnimationFrame(actualizarCronometro);
       } else {
-        detonar();
+        visorCronometro.classList.remove("critico");
+        visorCronometro.textContent = "00:00.000";
       }
-    }
-
-    function detonar() {
-      exploto = true;
-      tiempoPresionado = 0;
-      pulsador.classList.remove("pulsado");
-      luzIndicador.classList.remove("encendida");
-      visorCronometro.textContent = "00:00.000";
-
-      contenedorPrincipal.classList.add("sacudida");
-      pantallaExplosion.classList.remove("oculto");
-    }
-
-    function reiniciarSistema() {
-      cancelAnimationFrame(animacionFrameId);
-      exploto = false;
-      cronometroIniciado = false;
-      codigoActual = "";
-      tiempoPresionado = 0;
-
-      visorCronometro.textContent = "03:00.000";
-      visorCronometro.classList.remove("critico");
-      contenedorPrincipal.classList.remove("sacudida");
-      pantallaExplosion.classList.add("oculto");
-      actualizarInterfaz();
     }
 
     function presionar(e) {
       if (e) e.preventDefault();
-      if (exploto || tiempoPresionado) return;
+      if (tiempoPresionado) return;
 
       if (!cronometroIniciado) {
         iniciarCronometro();
@@ -185,7 +148,7 @@
 
     function soltar(e) {
       if (e) e.preventDefault();
-      if (exploto || !tiempoPresionado) return;
+      if (!tiempoPresionado) return;
 
       const duracion = Date.now() - tiempoPresionado;
       tiempoPresionado = 0;
@@ -203,7 +166,6 @@
     }
 
     function borrarUltimo() {
-      if (exploto) return;
       if (codigoActual.length > 0) {
         codigoActual = codigoActual.slice(0, -1);
         actualizarInterfaz();
@@ -211,7 +173,6 @@
     }
 
     function borrarTodo() {
-      if (exploto) return;
       codigoActual = "";
       actualizarInterfaz();
     }
