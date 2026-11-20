@@ -31,10 +31,11 @@ body {
   border: 4px solid #6b4c2a;
   outline: 2px solid #140a05;
   border-radius: 14px;
-  padding: 22px 20px;
+  padding: 20px;
   text-align: center;
   max-width: 380px;
   width: 100%;
+  overflow: hidden;
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.85),
     inset 0 2px 4px rgba(255, 220, 170, 0.2),
@@ -49,6 +50,7 @@ body {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #f3d98b, #9c742c 70%, #4d3711 100%);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  z-index: 5;
 }
 .tornillo::after {
   content: '';
@@ -70,8 +72,8 @@ body {
   background: linear-gradient(180deg, #241e18 0%, #17130f 100%);
   border: 2px solid #8c6b32;
   border-radius: 8px;
-  padding: 10px 12px;
-  margin-bottom: 14px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -80,7 +82,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .bisel-luz {
@@ -91,8 +93,8 @@ body {
 }
 
 .luz-telegrafo {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #6e2222, #2b0909 80%);
   border: 1px solid #4a1212;
@@ -118,11 +120,50 @@ body {
 }
 
 .placa-modelo {
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 1.8px;
   color: #8f7750;
   border-top: 1px solid rgba(140, 107, 50, 0.3);
   padding-top: 4px;
+}
+
+/* NUEVO: Estilos del cronómetro retro */
+.panel-cronometro {
+  background: #140d09;
+  border: 2px solid #8c6b32;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 12px;
+  box-shadow: inset 0 3px 8px #000, 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.cronometro-label {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 1.5px;
+  color: #a88d5d;
+  margin-bottom: 2px;
+}
+
+.visor-cronometro {
+  font-size: 1.55rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #ff5522;
+  text-shadow:
+    0 0 8px rgba(255, 85, 34, 0.8),
+    0 0 16px rgba(255, 30, 0, 0.5);
+  font-variant-numeric: tabular-nums; /* Evita que los números salten de ancho */
+}
+
+.visor-cronometro.critico {
+  color: #ff1a1a;
+  animation: parpadeoAlerta 0.25s infinite alternate;
+}
+
+@keyframes parpadeoAlerta {
+  from { opacity: 1; text-shadow: 0 0 12px #ff0000, 0 0 24px #ff0000; }
+  to { opacity: 0.55; text-shadow: 0 0 4px #ff0000; }
 }
 
 /* Cinta de papel telegráfico */
@@ -132,12 +173,12 @@ body {
   border-radius: 6px;
   border: 2px solid #6b5028;
   box-shadow: inset 0 4px 10px #000;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .display-morse {
   position: relative;
-  font-size: 1.85rem;
+  font-size: 1.8rem;
   font-weight: bold;
   letter-spacing: 6px;
   color: #1f1913;
@@ -147,8 +188,8 @@ body {
     linear-gradient(180deg, #e6dcc6 0%, #f5eedc 50%, #dfd3ba 100%);
   border-left: 3px dashed #9e8d70;
   border-right: 3px dashed #9e8d70;
-  padding: 12px 10px;
-  min-height: 58px;
+  padding: 10px;
+  min-height: 52px;
   word-break: break-all;
   box-shadow: inset 0 0 8px rgba(82, 62, 32, 0.35);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
@@ -157,27 +198,25 @@ body {
 /* Base metálica del manipulador telegráfico */
 .telegrafo-base {
   position: relative;
-  background:
-    radial-gradient(circle at 50% 40%, #3d342c 0%, #1c1713 85%);
+  background: radial-gradient(circle at 50% 40%, #3d342c 0%, #1c1713 85%);
   border: 3px solid #8a6933;
   border-radius: 12px;
-  height: 245px;
-  margin: 0 auto 18px auto;
+  height: 230px;
+  margin: 0 auto 14px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 18px;
+  padding-bottom: 16px;
   box-shadow:
     inset 0 0 20px rgba(0, 0, 0, 0.85),
     0 6px 14px rgba(0, 0, 0, 0.6);
   overflow: hidden;
 }
 
-/* Conjunto de bobinas de cobre (electroimán) */
 .electroiman {
   position: absolute;
-  top: 14px;
+  top: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -186,16 +225,15 @@ body {
 
 .bobina {
   width: 34px;
-  height: 44px;
+  height: 42px;
   border-radius: 4px;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      #7c3612 0px,
-      #d46e35 2px,
-      #f29b63 3px,
-      #63290b 5px
-    );
+  background: repeating-linear-gradient(
+    0deg,
+    #7c3612 0px,
+    #d46e35 2px,
+    #f29b63 3px,
+    #63290b 5px
+  );
   border-top: 4px solid #c9a24b;
   border-bottom: 4px solid #8f6d27;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7), inset -4px 0 6px rgba(0, 0, 0, 0.4);
@@ -209,10 +247,9 @@ body {
   border-radius: 2px;
 }
 
-/* Contacto eléctrico / Yunque */
 .yunque-contacto {
   position: absolute;
-  top: 66px;
+  top: 62px;
   width: 36px;
   height: 16px;
   background: linear-gradient(180deg, #d4af37, #6e5219);
@@ -233,12 +270,11 @@ body {
   transition: opacity 0.04s;
 }
 
-/* Brazo principal de latón */
 .telegrafo-brazo {
   position: absolute;
-  top: 52px;
+  top: 48px;
   width: 26px;
-  height: 115px;
+  height: 110px;
   background: linear-gradient(90deg, #7a5c24 0%, #e6c66e 35%, #fff0b3 50%, #b88c35 75%, #5e4417 100%);
   border: 1.5px solid #3d2b0c;
   border-radius: 5px;
@@ -249,7 +285,7 @@ body {
 
 .eje-pivote {
   position: absolute;
-  top: 22px;
+  top: 20px;
   left: -8px;
   width: 40px;
   height: 8px;
@@ -258,12 +294,11 @@ body {
   border: 1px solid #332308;
 }
 
-/* Faldón protector de latón bajo el pomo */
 .soporte-pomo {
   position: relative;
   z-index: 3;
-  width: 114px;
-  height: 114px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #f5dc8c 0%, #b88c32 55%, #5c4213 100%);
   border: 2px solid #3b290a;
@@ -276,10 +311,9 @@ body {
   transition: transform 0.05s ease, box-shadow 0.05s ease;
 }
 
-/* Pomo de baquelita negra */
 .btn-pomo {
-  width: 84px;
-  height: 84px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: radial-gradient(circle at 32% 28%, #545454 0%, #222222 35%, #0a0a0a 85%, #000 100%);
   border: 2px solid #3a3a3a;
@@ -298,7 +332,6 @@ body {
   transition: transform 0.05s ease, box-shadow 0.05s ease;
 }
 
-/* Animación física al presionar el manipulador */
 .btn-pomo:active,
 .btn-pomo.pulsado {
   transform: scale(0.95) translateY(3px);
@@ -326,12 +359,12 @@ body {
 .acciones {
   display: flex;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .btn-secundario {
   flex: 1;
-  padding: 11px 8px;
+  padding: 10px 8px;
   font-size: 0.8rem;
   font-weight: bold;
   letter-spacing: 1px;
@@ -366,7 +399,7 @@ body {
   background: linear-gradient(180deg, #241b13 0%, #17110c 100%);
   border: 2px solid #7d5e2b;
   border-radius: 10px;
-  padding: 10px 12px 12px;
+  padding: 8px 12px 10px;
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
@@ -383,7 +416,7 @@ body {
   border: 2px solid #59411b;
   border-radius: 6px;
   padding: 6px;
-  min-height: 54px;
+  min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -392,10 +425,85 @@ body {
 
 .letra {
   font-weight: bold;
-  font-size: 2.1rem;
+  font-size: 2rem;
   color: #ffbe3b;
   text-shadow:
     0 0 8px rgba(255, 170, 0, 0.75),
     0 0 18px rgba(255, 120, 0, 0.45);
   line-height: 1.15;
+}
+
+/* NUEVO: Pantalla de explosión y efecto de sacudida */
+.overlay-explosion {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(160, 20, 0, 0.94) 0%, rgba(25, 5, 0, 0.98) 100%);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: aparecerExplosion 0.25s ease-out;
+}
+
+.overlay-explosion.oculto {
+  display: none;
+}
+
+.caja-explosion {
+  border: 3px solid #ffaa00;
+  background: rgba(15, 5, 0, 0.85);
+  border-radius: 12px;
+  padding: 24px 16px;
+  box-shadow: 0 0 30px #ff3300;
+}
+
+.caja-explosion h2 {
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+  color: #ffcc00;
+  text-shadow: 0 0 15px #ff2200;
+}
+
+.caja-explosion p {
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  color: #ffd6cc;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.btn-reiniciar {
+  background: linear-gradient(180deg, #d4af37 0%, #8c6b32 100%);
+  border: 2px solid #fff0b3;
+  color: #1f0f07;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.btn-reiniciar:active {
+  transform: scale(0.96);
+}
+
+.sacudida {
+  animation: temblor 0.45s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes temblor {
+  10%, 90% { transform: translate3d(-4px, 2px, 0); }
+  20%, 80% { transform: translate3d(6px, -3px, 0); }
+  30%, 50%, 70% { transform: translate3d(-8px, 4px, 0); }
+  40%, 60% { transform: translate3d(8px, -2px, 0); }
+}
+
+@keyframes aparecerExplosion {
+  from { opacity: 0; transform: scale(1.15); }
+  to { opacity: 1; transform: scale(1); }
 }
