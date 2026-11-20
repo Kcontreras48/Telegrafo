@@ -26,9 +26,9 @@
       <div class="placa-modelo">TELÉGRAFO MORSE • PAT. 1844</div>
     </div>
 
-    <!-- NUEVO: Cronómetro de autodestrucción -->
+    <!-- Cronómetro de 3 minutos -->
     <div class="panel-cronometro">
-      <span class="cronometro-label">TEMPORIZADOR DE SOBRECARGA</span>
+      <span class="cronometro-label">TIEMPO RESTANTE</span>
       <div id="visorCronometro" class="visor-cronometro">03:00.000</div>
     </div>
 
@@ -39,24 +39,20 @@
 
     <!-- Base de madera y mecanismo electromagnético -->
     <div class="telegrafo-base">
-      <!-- Bobinas de cobre (electroimanes) -->
       <div class="electroiman">
         <div class="bobina"></div>
         <div class="puente-laton"></div>
         <div class="bobina"></div>
       </div>
 
-      <!-- Punto de contacto y chispa -->
       <div class="yunque-contacto">
         <span class="chispa"></span>
       </div>
 
-      <!-- Brazo articulado de latón -->
       <div class="telegrafo-brazo">
         <span class="eje-pivote"></span>
       </div>
 
-      <!-- Faldón de latón + Pomo de baquelita -->
       <div class="soporte-pomo">
         <div id="pulsador" class="btn-pomo">PULSAR</div>
       </div>
@@ -75,14 +71,14 @@
         <span id="salidaTexto" class="letra">-</span>
       </div>
     </div>
+  </div>
 
-    <!-- NUEVO: Pantalla superpuesta de explosión -->
-    <div id="pantallaExplosion" class="overlay-explosion oculto">
-      <div class="caja-explosion">
-        <h2>💥 ¡BOOM! 💥</h2>
-        <p>EL TELÉGRAFO HA EXPLOTADO POR SOBRECARGA</p>
-        <button class="btn-reiniciar" onclick="reiniciarSistema()">REPARAR TELÉGRAFO</button>
-      </div>
+  <!-- MENSAJE DE EXPLOSIÓN SOBRE TODA LA PANTALLA (Oculto hasta que llegue a 00:00.000) -->
+  <div id="pantallaExplosion" class="overlay-explosion oculto">
+    <div class="cartel-explosion">
+      <div class="icono-bomba">💥</div>
+      <h1>LA BOMBA HA EXPLOTADO</h1>
+      <button class="btn-reiniciar" onclick="reiniciarSistema()">REINICIAR</button>
     </div>
   </div>
 
@@ -102,7 +98,7 @@
     let codigoActual = "";
     let tiempoPresionado = 0;
 
-    // Variables del cronómetro (3 minutos = 180,000 milisegundos)
+    // 3 minutos = 180,000 ms
     const TIEMPO_TOTAL_MS = 3 * 60 * 1000;
     let cronometroIniciado = false;
     let tiempoFin = 0;
@@ -120,7 +116,6 @@
     function iniciarCronometro() {
       if (cronometroIniciado) return;
       cronometroIniciado = true;
-      // Usamos performance.now() para máxima precisión en milisegundos
       tiempoFin = performance.now() + TIEMPO_TOTAL_MS;
       actualizarCronometro();
     }
@@ -133,14 +128,12 @@
       const segundos = Math.floor((restante % 60000) / 1000);
       const milisegundos = Math.floor(restante % 1000);
 
-      // Formatear con ceros a la izquierda: 02:59.999
       const minStr = String(minutos).padStart(2, "0");
       const segStr = String(segundos).padStart(2, "0");
       const msStr = String(milisegundos).padStart(3, "0");
 
       visorCronometro.textContent = `${minStr}:${segStr}.${msStr}`;
 
-      // Efecto de alerta en los últimos 15 segundos
       if (restante <= 15000 && restante > 0) {
         visorCronometro.classList.add("critico");
       }
@@ -158,7 +151,7 @@
       pulsador.classList.remove("pulsado");
       luzIndicador.classList.remove("encendida");
       visorCronometro.textContent = "00:00.000";
-      
+
       contenedorPrincipal.classList.add("sacudida");
       pantallaExplosion.classList.remove("oculto");
     }
@@ -181,7 +174,6 @@
       if (e) e.preventDefault();
       if (exploto || tiempoPresionado) return;
 
-      // Arranca el cronómetro en el primer clic
       if (!cronometroIniciado) {
         iniciarCronometro();
       }
